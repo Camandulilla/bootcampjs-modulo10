@@ -1,0 +1,35 @@
+* {
+  background-color: azure;
+}
+
+#contenedor {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+h1 {
+  font-size: 50px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  text-align: center;
+}
+
+#cajaDeTexto {
+  background-color: white;
+  text-align: center;
+  border-radius: 5px;
+  border-color: limegreen;
+  border-style: solid;
+  padding: 20px;
+  width: 250px;
+}
+
+#botonFiltrar {
+  background-color: limegreen;
+  padding: 20px;
+  border-radius: 5px;
+  width: 130px;
+  font-size: 19px;
+  font-weight: bold;
+}
