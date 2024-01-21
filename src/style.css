@@ -1,8 +1,7 @@
-* {
-  background-color: azure;
+body {
+  background-color: gainsboro;
 }
-
-#contenedor {
+#contenedorPrincipal {
   text-align: center;
   display: flex;
   justify-content: center;
@@ -29,7 +28,47 @@ h1 {
   background-color: limegreen;
   padding: 20px;
   border-radius: 5px;
+  border-color: limegreen;
+  border-style: solid;
   width: 130px;
   font-size: 19px;
   font-weight: bold;
+}
+
+#contenedor-personajes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  gap: 25px;
+  margin-top: 40px;
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+.personaje {
+  background-color: white;
+  border: 5px solid black;
+  padding: 20px;
+  width: 350px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 80px;
+  max-height: 280px;
+}
+
+p {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  flex-grow: 1;
+}
+
+p + p {
+  margin-top: 0px;
 }
