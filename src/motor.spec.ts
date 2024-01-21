@@ -18,7 +18,7 @@ describe("getPersonajes", (nombre?: string) => {
       },
     ];
 
-    const axiosSpy = vi.spyOn(Axios, "get").mockResolvedValue({
+    vi.spyOn(Axios, "get").mockResolvedValue({
       data: personajesMock,
     });
 
@@ -31,7 +31,7 @@ describe("getPersonajes", (nombre?: string) => {
 
   it("Comprueba el caso de endpoint no encontrado (Error 404)", async () => {
     // Arrange
-    const axiosSpy = vi.spyOn(Axios, "get").mockRejectedValue({
+    vi.spyOn(Axios, "get").mockRejectedValue({
       response: {
         status: 404,
         data: "Endpoint no encontrado",
@@ -59,7 +59,7 @@ describe("getPersonajes", (nombre?: string) => {
       },
     ];
 
-    const axiosSpy = vi.spyOn(Axios, "get").mockResolvedValue({
+    vi.spyOn(Axios, "get").mockResolvedValue({
       data: personajesMock,
     });
 
@@ -72,19 +72,8 @@ describe("getPersonajes", (nombre?: string) => {
 
   it("Comprueba el caso de filtrar el nombre del personaje buscado y que no se encuentre", async () => {
     //Assert
-    const personajesMock: Personaje[] = [
-      {
-        id: 1,
-        nombre: "Mortadelo",
-        apodo: "Mortadelo",
-        especialidad: "Disfraces",
-        habilidades: ["Camuflaje", "Imitaciones", "Huida rápida"],
-        amigo: "Filemón",
-        imagen: "mortadelo.webp",
-      },
-    ];
 
-    const axiosSpy = vi.spyOn(Axios, "get").mockRejectedValue({
+    vi.spyOn(Axios, "get").mockRejectedValue({
       response: {
         status: 404,
         data: "Personaje no encontrado",
@@ -92,7 +81,8 @@ describe("getPersonajes", (nombre?: string) => {
     });
 
     //Act
-    const resultado = await getPersonajes("Jonathan");
+    nombre = "Jonathan";
+    const resultado = await getPersonajes(nombre);
 
     //Assert
     expect(resultado).toEqual([]);
