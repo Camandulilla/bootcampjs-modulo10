@@ -1,3 +1,3 @@
 import { gridPersonajes } from "./ui";
 
-gridPersonajes();
+document.addEventListener("DOMContentLoaded", () => gridPersonajes());
