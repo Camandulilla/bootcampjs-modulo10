@@ -8,4 +8,6 @@ export interface Personaje {
   imagen: string;
 }
 
-export const ENDPOINT_PERSONAJES = "http://localhost:3000/personajes";
+export const API_URL = "http://localhost:3000";
+
+export const CHARACTERS_URL = `${API_URL}/personajes`;

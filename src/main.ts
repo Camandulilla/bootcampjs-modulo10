@@ -1,5 +1,3 @@
-import { mostrarPersonajes, nombrePersonajeFiltrado } from "./ui";
-import { getPersonajes } from "./motor";
+import { gridPersonajes } from "./ui";
 
-mostrarPersonajes(await getPersonajes());
-nombrePersonajeFiltrado();
+gridPersonajes();

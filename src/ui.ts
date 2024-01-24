@@ -1,7 +1,8 @@
 import { Personaje } from "./modelo";
 import { getPersonajes } from "./motor";
+import { API_URL } from "./modelo";
 
-export const mostrarPersonajes = async (datos: Personaje[]) => {
+const crearListadoTarjetas = (datos: Personaje[]) => {
   //Obtenemos el contenedor del DOM donde mostrar los personajes
   const contenedorPersonajes = document.getElementById("contenedor-personajes");
   if (contenedorPersonajes && contenedorPersonajes instanceof HTMLElement) {
@@ -13,7 +14,7 @@ export const mostrarPersonajes = async (datos: Personaje[]) => {
     divPersonaje.classList.add("personaje");
 
     const imagenElement = document.createElement("img");
-    imagenElement.src = `http://localhost:3000/${personaje.imagen}`;
+    imagenElement.src = API_URL + `/${personaje.imagen}`;
     imagenElement.alt = personaje.nombre;
 
     const nombreElement = document.createElement("p");
@@ -38,32 +39,28 @@ export const mostrarPersonajes = async (datos: Personaje[]) => {
   });
 };
 
-export const nombrePersonajeFiltrado = async () => {
-  const cajaTexto = document.getElementById("cajaDeTexto");
-  const botonFiltrar = document.getElementById("botonFiltrar");
-  const contenedorResultado = document.getElementById("contenedor-personajes");
-
-  if (
-    botonFiltrar &&
-    botonFiltrar instanceof HTMLButtonElement &&
-    contenedorResultado
-  ) {
-    botonFiltrar.addEventListener("click", async () => {
-      if (cajaTexto && cajaTexto instanceof HTMLInputElement) {
-        const nombreBuscado = cajaTexto.value.trim().toLowerCase();
-
-        if (nombreBuscado) {
-          // Limpiar el contenedor antes de mostrar el nuevo personaje
-          contenedorResultado.innerHTML = "";
-
-          const personajes = await getPersonajes(nombreBuscado);
-
-          mostrarPersonajes(personajes);
-          cajaTexto.value = "";
-        } else {
-          mostrarPersonajes(await getPersonajes());
-        }
-      }
-    });
-  }
+export const gridPersonajes = async () => {
+  const datos = await getPersonajes();
+  crearListadoTarjetas(datos);
 };
+
+//EVENTO CUANDO EL USUARIO HACE CLICK EN EL BOTÓN
+const cajaTexto = document.getElementById("cajaDeTexto");
+const botonFiltrar = document.getElementById("botonFiltrar");
+
+if (botonFiltrar && botonFiltrar instanceof HTMLButtonElement) {
+  botonFiltrar.addEventListener("click", async () => {
+    if (cajaTexto && cajaTexto instanceof HTMLInputElement) {
+      const nombreBuscado = cajaTexto.value.trim().toLowerCase();
+
+      if (nombreBuscado) {
+        const datos = await getPersonajes(nombreBuscado);
+
+        crearListadoTarjetas(datos);
+        cajaTexto.value = "";
+      } else {
+        gridPersonajes();
+      }
+    }
+  });
+}
